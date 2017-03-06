@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Module.
+ */
+
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\CssCommand;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * F ajaxModeDev.
+ */
+function node_activity_ajax(array &$form, $form_state) {
+  $response = new AjaxResponse();
+  $show = ['display' => 'block'];
+  $hide = ['display' => 'none'];
+  $price = $form_state->getValue('field_activit_cost_formir');
+  if ($price[0]['value'] == "unline") {
+    $response->addCommand(new CssCommand('.form-item-field-activity-cost-min-0-value', $show));
+  }
+  else {
+    $response->addCommand(new CssCommand('.form-item-field-activity-cost-min-0-value', $hide));
+  }
+  return $response;
+}
+
+/**
+ * Node_activity_form_alter.
+ */
+function node_activity_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'node_activity_form') {
+    $form['field_activit_cost_formir']['widget']['#ajax'] = [
+      'callback' => 'node_activity_ajax',
+      'effect' => 'fade',
+      'progress' => ['type' => 'throbber', 'message' => ""],
+      'event' => 'change',
+    ];
+  }
+}

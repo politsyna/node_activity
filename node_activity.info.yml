@@ -1,0 +1,6 @@
+name: node_activity
+description: 'node_activity'
+type: module
+core: 8.x
+version: 1.1
+package: Synapse
