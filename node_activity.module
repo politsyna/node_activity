@@ -17,11 +17,11 @@ function node_activity_ajax(array &$form, $form_state) {
   $show = ['display' => 'block'];
   $hide = ['display' => 'none'];
   $price = $form_state->getValue('field_activit_cost_formir');
-  if ($price[0]['value'] == "unline") {
-    $response->addCommand(new CssCommand('.form-item-field-activity-cost-min-0-value', $show));
+  if ($price[0]['value'] == "line") {
+    $response->addCommand(new CssCommand('.form-item-field-activity-cost-min-0-value', $hide));
   }
   else {
-    $response->addCommand(new CssCommand('.form-item-field-activity-cost-min-0-value', $hide));
+    $response->addCommand(new CssCommand('.form-item-field-activity-cost-min-0-value', $show));
   }
   return $response;
 }
